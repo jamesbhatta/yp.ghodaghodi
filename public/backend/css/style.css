@@ -1,0 +1,13 @@
+html{
+	scroll-behavior: smooth;
+}
+
+#sidebar li a{
+	text-decoration: none;
+	color: #45526e;
+}
+
+#sidebar li a i{
+	min-width: 25px;
+	text-align: center;
+}
