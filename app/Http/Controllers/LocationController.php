@@ -100,7 +100,11 @@ class LocationController extends Controller
      */
      public function updateCity(CityRequest $request, City $city)
      {
-        //
+        $city->name = $request->name;
+        $city->zone_id = $request->zone_id;
+        $city->update();
+        $request->session()->flash('success', $request->name . ' city has been updated.');
+        return redirect()->route('location.index');
      }
 
     /**
@@ -129,7 +133,7 @@ class LocationController extends Controller
      public function destroyCity(Request $request, City $city)
      {
         $city->delete();
-        $request->session()->flash('success', 'City name has been deleted from the database.');
+        $request->session()->flash('success', $city->name . ' city has been deleted from the database.');
 
         return redirect()->route('location.index');
     }

@@ -26,11 +26,15 @@ Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
 	Route::get('restore/{id}', 'BusinessController@restore')->name('restore');
 	Route::delete('business/destroy/{id}', 'BusinessController@harddelete')->name('business.harddelete');
 
+	// Location Routes
 	Route::get('location', 'LocationController@index')->name('location.index');
+
 	Route::post('location/zone', 'LocationController@storeZone')->name('zone.store');
-	Route::post('location/city', 'LocationController@storeCity')->name('city.store');
 	Route::put('location/zone', 'LocationController@updateZone')->name('zone.update');
 	Route::delete('location/zone/{zone}', 'LocationController@destroyZone')->name('zone.destroy');
+
+	Route::post('location/city', 'LocationController@storeCity')->name('city.store');
+	Route::put('location/city/{city?}', 'LocationController@updateCity')->name('city.update');
 	Route::delete('location/city/{city}', 'LocationController@destroyCity')->name('city.destroy');
 });
 

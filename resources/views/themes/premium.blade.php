@@ -78,36 +78,16 @@
 												@default
 												<th scope="row">Saturday</th>
 												@endswitch
-												<td>{{ $business_hours->open_time }} - {{ $business_hours->close_time }}</td>
+												<td>
+													@if($business_hours->open_time)
+													{{ date('g:i A', strtotime($business_hours->open_time)) }} - 
+													{{ date('g:i A', strtotime($business_hours->close_time)) }}
+													@else
+													Closed 
+													@endif
+												</td>
 											</tr>
 											@endforeach
-											{{-- <tr>
-												<th scope="row">Sunday</th>
-											</tr>
-											<tr>
-												<th scope="row">Monday</th>
-												<td>10 AM - 4 PM</td>
-											</tr>
-											<tr>
-												<th scope="row">Tuesday</th>
-												<td>10 AM - 4 PM</td>
-											</tr>
-											<tr>
-												<th scope="row">Wednesday</th>
-												<td>10 AM - 4 PM</td>
-											</tr>
-											<tr>
-												<th scope="row">Thursday</th>
-												<td>10 AM - 4 PM</td>
-											</tr>
-											<tr>
-												<th scope="row">Friday</th>
-												<td>10 AM - 4 PM</td>
-											</tr>
-											<tr>
-												<th scope="row">Saturday</th>
-												<td>Closed</td>
-											</tr> --}}
 										</tbody>
 									</table>
 								</div>
@@ -171,7 +151,7 @@
 								<h4 class="h4">{{ $business->description_title ?? 'Who We Are?' }}</h4>
 							</div>
 							<p>
-								{{ $business->description }}
+								{!! $business->description !!}
 							</p>
 						</div>
 						<div class="col-md-6">
@@ -181,10 +161,7 @@
 							<p>
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
-										{{ $business->services }}
-									</li>
-									<li class="list-group-item">
-										{{ $business->services }}
+										{!! $business->services !!}
 									</li>
 								</ul>
 							</p>

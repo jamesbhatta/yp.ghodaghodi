@@ -28,7 +28,9 @@
 					{{ $item->id }}
 				</td>
 				<td>
-					{{ $item->name }}
+					<a href="{{ route('business.view', $item->slug) }}" target="_blank">
+						{{ $item->name }}
+					</a>
 				</td>
 				<td>{{ $item->account_type == 2 ? 'Premium' : 'Free' }}</td>
 				<td>{{ $item->expires_at }}</td>

@@ -24,6 +24,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       // 
+        Blade::directive('invalid', function($key) {
+            $key = str_replace(['\'', '"'], '', $key);
+            $errors = session()->get('errors') ?: new \Illuminate\Support\ViewErrorBag;
+
+            if ($message = $errors->first($key)) {
+                return "<?php echo '<div class=\"invalid-feedback\">{$message}</div>'; ?>";
+            }
+        });
     }
 }

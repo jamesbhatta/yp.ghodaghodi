@@ -56,36 +56,39 @@
 							<table class="table table-striped table-borderless table-sm">
 								<tbody>
 									@foreach ($business->business_hours as $business_hours)
-										{{ $business_hours->close_time }}
-									@endforeach
 									<tr>
+										@switch($business_hours->day)
+										@case(1)
 										<th scope="row">Sunday</th>
-										{{-- <td>{{ $business->business_hours[1]->open_time }} - 4 PM</td> --}}
-									</tr>
-									<tr>
+										@break
+										@case(2)
 										<th scope="row">Monday</th>
-										<td>10 AM - 4 PM</td>
-									</tr>
-									<tr>
+										@break
+										@case(3)
 										<th scope="row">Tuesday</th>
-										<td>10 AM - 4 PM</td>
-									</tr>
-									<tr>
+										@break
+										@case(4)
 										<th scope="row">Wednesday</th>
-										<td>10 AM - 4 PM</td>
-									</tr>
-									<tr>
+										@break
+										@case(5)
 										<th scope="row">Thursday</th>
-										<td>10 AM - 4 PM</td>
-									</tr>
-									<tr>
+										@break
+										@case(6)
 										<th scope="row">Friday</th>
-										<td>10 AM - 4 PM</td>
-									</tr>
-									<tr>
+										@break
+										@default
 										<th scope="row">Saturday</th>
-										<td>Closed</td>
+										@endswitch
+										<td>
+											@if($business_hours->open_time)
+											{{ date('g:i A', strtotime($business_hours->open_time)) }} - 
+											{{ date('g:i A', strtotime($business_hours->close_time)) }}
+											@else
+											Closed 
+											@endif
+										</td>
 									</tr>
+									@endforeach
 								</tbody>
 							</table>
 						</div>

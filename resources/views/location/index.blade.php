@@ -36,7 +36,7 @@
 							<li class="list-group-item hoverable">
 								{{ $city->name }}
 								<span class="float-right">
-									<button class="btn btn-link p-0 ">
+									<button class="btn btn-link p-0 edit-city-btn" data-id="{{ $city->id }}" data-name="{{ $city->name }}" data-zone_id="{{ $city->zone->id }}">
 										<i class="fa fa-edit fa-sm text-warning"></i>
 									</button>
 									&nbsp; &nbsp;
@@ -135,13 +135,15 @@
 					</div>
 				</div>
 
-				<div class="card mb-4" style="display: none;">
+				<div class="card mb-4" id="editCityCard" style="display: none; max-width: 350px;">
 					<div class="card-header cyan white-text">
-						Edit City
+						Edit City : <span class="item-name"></span>
 					</div>
 					<div class="card-body">
-						<form action="{{ route('city.store') }}" method="POST" class="form">
+						<form action="{{ route('city.update') }}" method="POST" id="cityUpdateform" class="form">
 							@csrf
+							@method('PUT')
+							<input type="number" name="id" hidden>
 							<div class="form-group">
 								<input type="text" name="name" class="form-control form-control-lg rounded-0 {{ hasError('name') }}" value="{{ old('name') }}" placeholder="Name of City">
 								@if ($errors->has('name'))
@@ -177,14 +179,22 @@
 		});
 		
 		$('.edit-zone-btn').click(function(){
-			console.log('button clicked');
-			var id = $(this).data('id');
-			var name = $(this).data('name');
+			console.log('Edit Zone clicked');
 			$('#editZoneCard').show();
 			$('#editZoneCard .item-name').html($(this).data('name'));
 			$('#editZoneCard input[name=id').val($(this).data('id'));
 			$('#editZoneCard input[name=name').val($(this).data('name'));
 			$('#editZoneCard input[name=name').select();
+		});
+
+		$('.edit-city-btn').click(function(){
+			console.log('Edit city clicked');
+			$('#editCityCard').show();
+			$('#editCityCard .item-name').html($(this).data('name'));
+			$('#cityUpdateform').attr('action', $('#cityUpdateform').attr('action') + '/' + $(this).data('id'));
+			$('#editCityCard input[name=id').val($(this).data('id'));
+			$('#editCityCard input[name=name').val($(this).data('name'));
+			$('#editCityCard input[name=name').select();
 		});
 	});
 </script>
