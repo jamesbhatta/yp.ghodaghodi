@@ -44,6 +44,11 @@
   @endguest
 
   <!-- SCRIPTS -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+  
   @stack('scripts')
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="{{ asset('backend/js/popper.min.js') }}"></script>

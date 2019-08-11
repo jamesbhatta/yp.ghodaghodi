@@ -11,11 +11,12 @@
 			<a href="{{ route('business.create') }}" class="btn btn-pink float-right px-3" style="border-radius: 50%;"><i class="fa fa-plus fa-2x"></i></a>
 		</div>
 	</div>
-	<table id="businessList" class="table table-hover" data-order="[]">
+	<table id="businessList" class="table table-hover white" data-order="[]">
 		<thead class="secondary-color text-white">
 			<tr>
 				<th>#</th>
 				<th>Name</th>
+				<th>Category</th>
 				<th>Acoount Type</th>
 				<th>Expires On</th>
 				<th data-orderable="false"></th>
@@ -32,6 +33,7 @@
 						{{ $item->name }}
 					</a>
 				</td>
+				<td>{{ $item->category->name }}</td>
 				<td>{{ $item->account_type == 2 ? 'Premium' : 'Free' }}</td>
 				<td>{{ $item->expires_at }}</td>
 				<td>

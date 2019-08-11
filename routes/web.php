@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
-});
+// Route::get('/', function () {
+// 	return view('welcome');
+// });
+
+Route::get('/', 'FrontendController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
 	Route::resource('category', 'CategoryController');
@@ -47,7 +49,10 @@ Route::get('/free', function() {
 });
 
 
-// Frontend
-
+// Frontend test
 Route::get('list', 'Frontend\BusinessController@index')->name('list');
 Route::get('business/view/{business}', 'Frontend\BusinessController@show')->name('business.view');
+
+// Frontend
+Route::get('/search/{keyword?}/{city?}/{category?}', 'FrontendController@search')->name('search');
+Route::get('/business/{slug}', 'FrontendController@viewBusiness')->name('business.view');

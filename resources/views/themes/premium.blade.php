@@ -1,7 +1,7 @@
 <div class="container-fluid p-0 white" style="font-weight: 300;">
 	<div class="view">
 		@if($business->cover_pic == 'no_image.jpg')
-		<img src="{{ asset('themes/premium/royal_cafe.jpg') }}" class="img-fluid" alt="">
+		<img src="https://mdbootstrap.com/img/Photos/Others/images/60.jpg" class="img-fluid" alt="">
 		@else
 		<img src="{{ asset('uploads/'. $business->cover_pic) }}" class="img-fluid" alt="">
 		@endif
@@ -9,7 +9,7 @@
 			<p class="white-text ">
 				<div class="flex-grow-1 text-center rgba-black-strong py-2 px-4">			
 					<h1 class="h1 font-weight-bolder white-text">{{ $business->name }}</h1>
-					<div class="white-text text-center"><big>{{ $business->address }}</big></div>
+					<div class="white-text text-center"><big>{{ $business->tagline ?? $business->address }}</big></div>
 				</div>
 			</p>
 		</div>
@@ -44,57 +44,12 @@
 			<div class="col-md-8">
 				<div class="p-4">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-5">
 							{{-- Opening Hour Card --}}
-							<div class="card rounded-0 border-0 z-depth-1 wow">
-								<div class="card-header white mdb-color-text">
-									<h3 class="h3 d-inline text-uppercase">Opening Hours</h3>
-									<i class="far fa-clock float-right fa-2x"></i>
-								</div>
-								<div class="card-body">
-									<table class="table table-striped table-borderless">
-										<tbody>
-											@foreach ($business->business_hours as $business_hours)
-											<tr>
-												@switch($business_hours->day)
-												@case(1)
-												<th scope="row">Sunday</th>
-												@break
-												@case(2)
-												<th scope="row">Monday</th>
-												@break
-												@case(3)
-												<th scope="row">Tuesday</th>
-												@break
-												@case(4)
-												<th scope="row">Wednesday</th>
-												@break
-												@case(5)
-												<th scope="row">Thursday</th>
-												@break
-												@case(6)
-												<th scope="row">Friday</th>
-												@break
-												@default
-												<th scope="row">Saturday</th>
-												@endswitch
-												<td>
-													@if($business_hours->open_time)
-													{{ date('g:i A', strtotime($business_hours->open_time)) }} - 
-													{{ date('g:i A', strtotime($business_hours->close_time)) }}
-													@else
-													Closed 
-													@endif
-												</td>
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
-							</div>
+							@include('themes.partials.business_hours')
 							{{-- End of Opening hour card --}}
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-7">
 							{{-- Business Details Card --}}
 							<div class="card wow">
 								<div class="card-header white mdb-color-text">
@@ -110,20 +65,24 @@
 
 											<tr>
 												<th scope="row">Phone : </th>
-												<td>{{ $business->contact_one }}</td>
+												<td>{{ $business->contact_one ?? $business->contact_two }}</td>
 											</tr>
+											@if($business->contact_two)
 											<tr>
 												<th scope="row"></th>
 												<td class="py-0">{{ $business->contact_two }}</td>
 											</tr>
+											@endif
 											<tr>
 												<th scope="row">Email : </th>
 												<td>{{ $business->email }}</td>
 											</tr>
+											@if($business->website)
 											<tr>
 												<th scope="row">Website : </th>
 												<td><a href="{{ $business->website }}" class="text-info">{{ $business->website }}</a></td>
 											</tr>
+											@endif
 										</tbody>
 									</table>
 									<div class="card-footer white">
@@ -171,7 +130,7 @@
 					{{-- Google Map --}}
 					<div class="mt-2">
 						<h3 class="h3 text-center mdb-color-text">Find Us Here</h3>
-						<iframe class="w-100" height="500" frameborder="0" style="border:0"
+						<iframe class="w-100 z-depth-1" height="500" frameborder="0" style="border:0"
 						src="https://www.google.com/maps/embed/v1/place?q=place_id:{{ $business->map_id }}&key=AIzaSyD8fOm6lOT1YqsXVlXIBPSV-8gbCOf7Dr8" allowfullscreen></iframe>
 					</div>
 
@@ -179,7 +138,7 @@
 					<section class="contact-section my-5">
 						<div class="card">
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-7">
 									<div class="card-body form">
 										<h3 class="mt-4"><i class="fas fa-envelope pr-2"></i>Write to us:</h3>
 										<div class="row">
@@ -196,20 +155,6 @@
 												</div>
 											</div>
 										</div>
-										{{-- <div class="row">
-											<div class="col-md-6">
-												<div class="md-form mb-0">
-													<input type="text" id="form-contact-phone" class="form-control">
-													<label for="form-contact-phone" class="">Your phone</label>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="md-form mb-0">
-													<input type="text" id="form-contact-company" class="form-control">
-													<label for="form-contact-company" class="">Your company</label>
-												</div>
-											</div>
-										</div> --}}
 										<div class="row">
 											<div class="col-md-12">
 												<div class="md-form mb-0">
@@ -223,7 +168,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<div class="card-body unique-color-dark text-center h-100 white-text">
 										<h3 class="my-4 pb-2">Contact information</h3>
 										<ul class="text-lg-left list-unstyled ml-4">

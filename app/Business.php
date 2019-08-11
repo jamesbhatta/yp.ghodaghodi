@@ -32,6 +32,13 @@ class Business extends Model
 		];
 	}
 
+    /**
+    * Get the Category of this business
+    */
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
 
     /**
      * Get the cities of this business.

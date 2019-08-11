@@ -1,0 +1,6 @@
+.paginate-center ul{
+	margin-bottom: 0;
+}
+.paginate-center .pagination{
+	justify-content: center;
+}

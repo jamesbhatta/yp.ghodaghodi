@@ -1,8 +1,7 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark secondary-color">
-
+<nav class="navbar navbar-expand-md navbar-dark secondary-color scrolling-navbar flexible-navbar" role="navigation">
   <!-- Navbar brand -->
-  <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
+  <a class="navbar-brand" href="/">{{ config('app.name') }}</a>
 
   <!-- Collapse button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"

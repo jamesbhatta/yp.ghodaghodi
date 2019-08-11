@@ -22,7 +22,7 @@ class BusinessController extends Controller
     public function index()
     {
         $heading = 'Business List';
-        $businesses = Business::select('id', 'name', 'slug', 'account_type', 'expires_at')->orderBy('id', 'desc')->get();
+        $businesses = Business::select('id', 'name', 'slug', 'account_type', 'expires_at', 'category_id')->with('category:id,name')->orderBy('id', 'desc')->get();
         return view('business.index', compact('heading', 'businesses'));
     }
 

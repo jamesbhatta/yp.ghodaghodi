@@ -13,21 +13,25 @@
   <!-- Material Design Bootstrap -->
   <link href="{{ asset('backend/css/mdb.min.css') }}" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
   <!-- MDBootstrap Datatables  -->
   <link href="{{ asset('backend/css/addons/datatables.min.css') }}" rel="stylesheet">
   <!-- JQuery -->
   <script type="text/javascript" src="{{ asset('backend/js/jquery-3.4.1.min.js') }}"></script>
-  <style>
-  *{
-    /*border: 1px solid red;*/
-  }
-</style>
+  
+  {{-- Select2 --}}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+
+  @stack('styles')
 </head>
 <body class="grey lighten-5">
   @include('themes.header')
   @yield('content')
+  @include('layouts.footer')
+
   <!-- SCRIPTS -->
+  @stack('scripts')
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="{{ asset('backend/js/popper.min.js') }}"></script>
   <!-- Bootstrap core JavaScript -->
