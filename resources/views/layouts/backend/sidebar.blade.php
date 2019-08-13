@@ -1,7 +1,7 @@
 <ul id="sidebar" class="nav white flex-column pb-4 vh-100">
   <li class="nav-item waves-effect">
     <a class="nav-link {{ setActive('dashboard') }}" href="{{ route('dashboard') }}">
-      <i class="fa fa-home"> &nbsp; </i> Home
+      <i class="fa fa-chart-line"> &nbsp; </i> Dashboard
     </a>
   </li>
   <li class="nav-item waves-effect">

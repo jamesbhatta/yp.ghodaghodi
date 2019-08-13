@@ -36,6 +36,11 @@
     <li class="nav-item">
       <a class="nav-link mdb-color-text" href="">Advertise With Us</a>
     </li>
+    @auth
+    <li class="nav-item">
+      <a class="nav-link white-text" href="{{ route('dashboard') }}"><i class="fa fa-chart-line"></i></a>
+    </li>
+    @endauth
   </ul>
 </div>
 <!-- Collapsible content -->
