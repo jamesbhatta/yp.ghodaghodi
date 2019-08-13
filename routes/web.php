@@ -17,11 +17,11 @@
 
 Route::get('/', 'FrontendController@index')->name('home');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware(['auth', 'verified']);
 
-Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'verified']], function () {
 	Route::resource('category', 'CategoryController');
 	Route::resource('business', 'BusinessController');
 	Route::get('trash', 'BusinessController@trash')->name('trash');
