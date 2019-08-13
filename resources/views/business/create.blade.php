@@ -297,6 +297,18 @@
 		</div>
 		{{-- End of Services Card --}}
 
+		{{-- Keywords Card --}}
+		<div class="card border-0 mb-4 w-responsive">
+			<div class="card-body">
+				<h4 class="h4 mdb-color-text">Keywords</h4>
+				<div class="form-group">
+					<label class="small form-text text-muted">Keywords will be used while searching for businesses.</label>
+					<textarea name="keywords" class="form-control" cols="30" rows="10" placeholder="Keywords should contain descriptive test such as Restaurant, Coffee House, Computer Store, etc.">{{ old('keywords') }}</textarea>
+				</div>
+			</div>
+		</div>
+		{{-- End of Keywords Card --}}
+
 		{{-- Pic Upload Card --}}
 		<div class="row mb-4">
 			<div class="col-md-6">
@@ -341,9 +353,6 @@
 				<div class="row">
 					<div class="col-md-6">
 						<button class="btn btn-success btn-block">Register</button>
-					</div>
-					<div class="col-md-6">
-						<button class="btn btn-pink btn-block">Save As Draft</button>
 					</div>
 				</div>
 			</div>

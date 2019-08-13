@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('categories', 'ApiController@getCategories');
 Route::get('cities', 'ApiController@getCities');
+
+Route::post('contact-us', 'ContactUsController@send');

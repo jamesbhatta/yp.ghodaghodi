@@ -43,7 +43,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text md-addon white border border-white rounded-left"><i class="fa fa-search -text fa-lg"></i></span>
                 </div>
-                <input type="text" name="keyword" class="form-control white border-0" placeholder="What are you looking for?">
+                <input type="text" name="keyword" class="form-control white border-0" value="{{ $keyword ?? '' }}" placeholder="What are you looking for?">
 
                 <div class="input-group-prepend">
                     <span class="input-group-text md-addon white border border-white"><i class="fa fa-map-marker-alt fa-lg"></i></span>

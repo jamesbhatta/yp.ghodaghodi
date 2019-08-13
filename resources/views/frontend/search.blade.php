@@ -1,13 +1,22 @@
 @extends('layouts.app')
 
+@push('styles')
+<style>
+	.category-list-item{
+
+	}
+	.category-list-item .label{
+		min-width: 30px;
+	}
+</style>
+@endpush
+
 @section('content')
-
 @include('partials.searchbar')
-
 <div class="container-fluid p-4 mt-2" style="font-weight: 300;">
-	<div class="row">
+	<div class="row p-0 p-md-4">
 		<div class="col-md-8">
-			<div class=" white py-4 px-5">
+			<div class=" white py-4 px-4 px-md-5">
 				<div class="card mb-4">
 					<div class="card-body mdb-color-text">
 						Showing Results for: &nbsp;
@@ -24,25 +33,38 @@
 						</span>
 					</div>
 				</div>
+
 				@forelse ($businesses as $business)
-				<div class="media mb-4 border p-2 hoverable">
-					<img src="https://mdbootstrap.com/img/Photos/Others/images/{{ random_int(40, 85) }}.jpg" class="align-self-center mr-3" style="width: 300px;">
-					<div class="media-body">
-						<h1 class="card-title">
-							<a class="text-info" href="{{ route('business.view', $business->slug) }}">{{ $business->name }}</a>
-						</h1>
-						<span class="badge badge-default">{{ $business->category->name }}</span>
-						<p class="card-text">
-							<div class="font-weight-bolder">
-								<i class="fa fa-map-marker-alt mr-3"></i>{{ $business->address }} , {{ $business->city->name }}
+				<div class="card mb-4 border category-list-item">
+					<div class="card-body  p-2 hoverable">
+						<div class="row">
+							<div class="col-md-5 col-sm-12 d-flex">
+								@if ($business->profile_pic)
+								<img src="{{ asset('uploads/'.$business->thumbnail) }}" class="align-self-center mr-3 img-fluid rounded">
+								@else
+								<img src="https://mdbootstrap.com/img/Photos/Others/images/{{ random_int(40, 85) }}.jpg" class="align-self-center mr-3 img-fluid rounded">
+								@endif
 							</div>
-							<div>
-								<i class="fa fa-mobile-alt mr-3"></i>{{ $business->contact_one }}
+							<div class="col-md-7 col-sm-12">
+								<div class="mdb-color-text p-2 p-md-0">
+									<h1 class="h2-responsive card-title">
+										<a class="text-info" href="{{ route('business.view', $business->slug) }}">{{ $business->name }}</a>
+									</h1>
+									<span class="badge badge-secondary">{{ $business->category->name }}</span>
+									<p class="card-text">
+										<div class="font-weight-bolder">
+											<i class="fa fa-map-marker-alt label amber-text"></i>{{ $business->address }} , {{ $business->city->name }}
+										</div>
+										<div>
+											<i class="fas fa-phone-volume label amber-text"></i>{{ $business->contact_one }}
+										</div>
+										<div>
+											<i class="far fa-envelope label amber-text"></i>{{ $business->email }}
+										</div>
+									</p>
+								</div>
 							</div>
-							<div>
-								<i class="far fa-envelope mr-3"></i>{{ $business->email }}
-							</div>
-						</p>
+						</div>
 					</div>
 				</div>
 				@empty
@@ -54,17 +76,19 @@
 				@endforelse
 
 				{{-- Pagination --}}
+				@if ($businesses->hasMorePages())
 				<div class="card rounded-0 z-depth-1">
 					<div class="card-body">
 						<div class="paginate-center">
-							{{ $businesses->links() }}
+							{{ $businesses->onEachSide(1)->links() }}
 						</div>
 					</div>
 				</div>
+				@endif
 				{{-- End of Pagination --}}
 
 				<div class="mt-5 text-center">
-					<img src="https://www.disruptivestatic.com/wp-content/uploads/2015/03/BOAT-728x90.png" alt="" class="src">
+					<img src="https://www.disruptivestatic.com/wp-content/uploads/2015/03/BOAT-728x90.png" class="img-fluid" alt="Horizental Banner">
 				</div>
 
 			</div>

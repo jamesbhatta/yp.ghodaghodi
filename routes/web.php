@@ -56,3 +56,15 @@ Route::get('business/view/{business}', 'Frontend\BusinessController@show')->name
 // Frontend
 Route::get('/search/{keyword?}/{city?}/{category?}', 'FrontendController@search')->name('search');
 Route::get('/business/{slug}', 'FrontendController@viewBusiness')->name('business.view');
+
+Route::get('/pricing', function() {
+	return view('extra.pricing');
+})->name('pricing');
+
+Route::get('/features', function() {
+	return view('extra.features');
+})->name('features');
+
+Route::get('/listing', function() {
+	return view('extra.listing');
+})->name('listing');

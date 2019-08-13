@@ -71,6 +71,7 @@ class BusinessController extends Controller
             $business->description = $request->description;
             $business->services_title = $request->services_title;
             $business->services = $request->services;
+            $business->keywords = $request->keywords;
             if ($request->profile_pic) {
                 $business->profile_pic = Storage::disk('public_uploads')->put('profile', $request->file('profile_pic'));
                 $business->thumbnail =  $business->storeThumbnail($request->file('profile_pic'));

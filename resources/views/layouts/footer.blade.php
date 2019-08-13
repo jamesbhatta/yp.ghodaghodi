@@ -6,7 +6,6 @@
 
       <!-- Grid column -->
       <div class="col-md-3 mx-auto">
-
         <!-- Links -->
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
@@ -24,7 +23,6 @@
             <a href="#!">Very long link 4</a>
           </li>
         </ul>
-
       </div>
       <!-- Grid column -->
 
@@ -32,7 +30,6 @@
 
       <!-- Grid column -->
       <div class="col-md-3 mx-auto">
-
         <!-- Links -->
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
@@ -50,7 +47,6 @@
             <a href="#!">Link 4</a>
           </li>
         </ul>
-
       </div>
       <!-- Grid column -->
 
@@ -58,7 +54,6 @@
 
       <!-- Grid column -->
       <div class="col-md-3 mx-auto">
-
         <!-- Links -->
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
@@ -76,7 +71,6 @@
             <a href="#!">Link 4</a>
           </li>
         </ul>
-
       </div>
       <!-- Grid column -->
 
@@ -84,10 +78,8 @@
 
       <!-- Grid column -->
       <div class="col-md-3 mx-auto">
-
         <!-- Links -->
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Free Account</h5>
-
         <form class="input-group">
           <input type="text" class="form-control form-control-sm" placeholder="Your business email"
           aria-label="Your email" aria-describedby="basic-addon2">
@@ -95,7 +87,6 @@
             <button class="btn btn-sm btn-outline-white my-0" type="button">Create</button>
           </div>
         </form>
-
       </div>
       <!-- Grid column -->
 
@@ -104,8 +95,6 @@
 
   </div>
   <!-- Footer Links -->
-
-
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© {{ now()->format('Y') }} Copyright
