@@ -58,10 +58,52 @@
 		</tbody>
 	</table>
 </div>
+
+
+<div class="card">
+	<div class="card-body">
+		<table id="testTable" class="table">
+			<thead class="primary-color text-white">
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Category</th>
+					<th>Acoount Type</th>
+					<th>Expires On</th>
+					<th data-orderable="false"></th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+</div>
 <script>
 	$(document).ready(function () {
 		$('#businessList').DataTable();
 		$('.dataTables_length').addClass('bs-select');
+
+		$('#testTable').DataTable({
+			processing: true,
+			serverSide: true,
+			ajax: '/api/businessDatatables',
+			columnDefs: [{
+				// targets: [0, 1, 2],
+				// className: 'mdl-data-table__cell--non-numeric'
+			}],
+			columns: [
+			{data: 'id', name: 'id'},
+			{data: 'name', name: 'name'},
+			{data: 'category', name: 'category.name'},
+			{data: 'account_type', name: 'account_type'},
+			{data: 'expires_at', name: 'expires_at'},
+			{
+				data: 'id', render:  function ( data, type, row ) {
+					return '<a href="'+ data + '/edit"><i class="fa fa-edit"></i></a>';
+				}
+			}
+			]
+		});
 	});
 </script>
 @endsection

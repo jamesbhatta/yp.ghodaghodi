@@ -1,5 +1,5 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-light yellow darken-1 scrolling-navbar">
+<nav class="navbar navbar-expand-lg navbar-light yellow darken-1 sticky-top scrolling-navbar z-depth-0">
 
   <!-- Navbar brand -->
   <a class="navbar-brand font-weight-bolder white-text" href="{{ route('home') }}">{{ config('app.name') }}</a>

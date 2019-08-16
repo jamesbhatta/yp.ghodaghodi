@@ -29,7 +29,7 @@
 						</span>
 						<i class="fas fa-caret-right mx-2" aria-hidden="true"></i>
 						<span class="font-weight-bolder">
-							<i class="fa fa-keyboard mr-2"></i>{{ $keyword->name ?? 'Any' }}
+							<i class="fa fa-keyboard mr-2"></i>{{ $keyword ?? 'Any' }}
 						</span>
 					</div>
 				</div>
@@ -39,7 +39,7 @@
 					<div class="card-body  p-2 hoverable">
 						<div class="row">
 							<div class="col-md-5 col-sm-12 d-flex">
-								@if ($business->profile_pic)
+								@if ($business->profile_pic != 'no_image.jpg')
 								<img src="{{ asset('uploads/'.$business->thumbnail) }}" class="align-self-center mr-3 img-fluid rounded">
 								@else
 								<img src="https://mdbootstrap.com/img/Photos/Others/images/{{ random_int(40, 85) }}.jpg" class="align-self-center mr-3 img-fluid rounded">

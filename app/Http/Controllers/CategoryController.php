@@ -81,11 +81,11 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-       $category->update($request->all());
+     $category->update($request->all());
 
-       $request->session()->flash('success', 'Category Updated Successfully!');
-       return redirect()->route('category.index');
-   }
+     $request->session()->flash('success', 'Category Updated Successfully!');
+     return redirect()->route('category.index');
+ }
 
     /**
      * Remove the specified resource from storage.

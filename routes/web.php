@@ -38,6 +38,11 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'verified']], func
 	Route::post('location/city', 'LocationController@storeCity')->name('city.store');
 	Route::put('location/city/{city?}', 'LocationController@updateCity')->name('city.update');
 	Route::delete('location/city/{city}', 'LocationController@destroyCity')->name('city.destroy');
+
+	Route::get('popular-categories', 'PopularCatController@index')->name('popularcat.index');
+	Route::post('popular-categories', 'PopularCatController@store')->name('popularcat.store');
+	Route::put('popular-categories/{popularCat}', 'PopularCatController@update')->name('popularcat.update');
+	Route::delete('popular-categories/{popularCat}', 'PopularCatController@destroy')->name('popularcat.destroy');
 });
 
 // Themes route

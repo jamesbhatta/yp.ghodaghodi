@@ -1,5 +1,5 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-md navbar-dark secondary-color scrolling-navbar flexible-navbar" role="navigation">
+<nav class="navbar navbar-expand-md navbar-dark secondary-color sticky-top scrolling-navbar" role="navigation">
   <!-- Navbar brand -->
   <a class="navbar-brand" href="/">{{ config('app.name') }}</a>
 

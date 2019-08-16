@@ -36,7 +36,7 @@
 }
 </style>
 @endpush
-<div class="container-fluid white mt-0 p-4">
+<div class="container-fluid white mt-0 p-4" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="container unique-color accent-4 p-2 z-depth-1 rounded-0">
         <form action="{{ route('search') }}" class="form">
             <div class="md-form input-group p-4 white-text">
@@ -49,7 +49,10 @@
                     <span class="input-group-text md-addon white border border-white"><i class="fa fa-map-marker-alt fa-lg"></i></span>
                 </div>
                 <select name="city" id="location" class="form-control white border-0">
-                    <option value=""></option>
+                    <option value="">All</option>
+                    @if(isset($city_id))
+                    <option value="{{ $city_id }}" selected>{{ $city->name }}</option>
+                    @endif
                 </select>
 
                 <div class="input-group-prepend white">
@@ -57,7 +60,10 @@
                 </div>
 
                 <select name="category" id="category" class="form-control white border-0">
-                    <option value=""></option>
+                    <option value="">ALl</option>
+                    @if(isset($category_id))
+                    <option value="{{ $category_id }}" selected>{{ $category->name }}</option>
+                    @endif
                 </select>
                 <div class="input-group-prepend white rounded-right">
                     <button type="submit" class="btn yellow accent-4 btn-lg rounded-0 z-depth-0">Find Now</button>
@@ -100,9 +106,10 @@
                             };
                         })
                     };
-                }
+                },
             }
         });
+
     });
 </script>
 @endpush

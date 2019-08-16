@@ -59,8 +59,8 @@
 										@csrf
 										@method('delete')
 										<button type="submit" class="btn btn-link py-0 my-0">
-										<i class="fa fa-trash-alt text-danger"></i>
-									</button>
+											<i class="fa fa-trash-alt text-danger"></i>
+										</button>
 									</form>
 								</td>
 							</tr>
@@ -77,6 +77,7 @@
 		</div>
 	</div>
 </div>
+
 <script>
 	$(document).ready(function () {
 		$('#categoryTable').DataTable();

@@ -15,4 +15,9 @@ class Category extends Model
 	{
 		return $this->hasMany('App\Business');
 	}
+
+	public function popularCategories()
+	{
+		return $this->hasOne('App\PopularCat');
+	}
 }

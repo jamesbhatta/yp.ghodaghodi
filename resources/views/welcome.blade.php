@@ -2,6 +2,17 @@
 
 @section('content')
 @include('partials.searchbar')
+
+<div class="row mx-0">
+	<div class="col-md-9">
+		@include('popularcat.categorycards')
+	</div>
+	<div class="col-md-3">
+		
+	</div>
+</div>
+
+
 <div class="container-fluid mt-4">
 	<div class="row p-2">
 		<div class="col-md-6 col-sm-12 yellow darken-1 text-dark">

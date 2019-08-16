@@ -21,3 +21,5 @@ Route::get('categories', 'ApiController@getCategories');
 Route::get('cities', 'ApiController@getCities');
 
 Route::post('contact-us', 'ContactUsController@send');
+
+Route::get('/businessDatatables', 'ApiController@businessDatatables');

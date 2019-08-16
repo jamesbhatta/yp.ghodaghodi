@@ -44,12 +44,8 @@
   @endguest
 
   <!-- SCRIPTS -->
-  <script type="text/javascript">
-    // Animations initialization
-    new WOW().init();
-  </script>
-  
   @stack('scripts')
+
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="{{ asset('backend/js/popper.min.js') }}"></script>
   <!-- Bootstrap core JavaScript -->
@@ -58,6 +54,11 @@
   <script type="text/javascript" src="{{ asset('backend/js/mdb.min.js') }}"></script>
   <!-- MDBootstrap Datatables  -->
   <script type="text/javascript" src="{{ asset('backend/js/addons/datatables.min.js') }}"></script>
+
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
   
 </body>
 </html>

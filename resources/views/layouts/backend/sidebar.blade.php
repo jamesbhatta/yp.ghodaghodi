@@ -25,6 +25,11 @@
     </a>
   </li>
   <li class="nav-item waves-effect">
+    <a class="nav-link" href="{{ route('popularcat.index') }}">
+      <i class="fa fa-ad"> &nbsp; </i> Popular Categories
+    </a>
+  </li>
+  <li class="nav-item waves-effect">
     <a class="nav-link" href="#!">
       <i class="fa fa-cogs"> &nbsp; </i> Settings
     </a>
