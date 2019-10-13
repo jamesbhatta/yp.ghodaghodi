@@ -15,6 +15,11 @@
     </a>
   </li>
   <li class="nav-item waves-effect">
+    <a class="nav-link {{ setActive('event*') }}" href="{{ route('event.index') }}">
+      <i class="far fa-calendar-alt"> &nbsp; </i> Events
+    </a>
+  </li>
+  <li class="nav-item waves-effect">
     <a class="nav-link {{ setActive('location*') }}" href="{{ route('location.index') }}">
       <i class="fa fa-map-marker-alt"> &nbsp; </i> Location
     </a>
@@ -25,7 +30,7 @@
     </a>
   </li>
   <li class="nav-item waves-effect">
-    <a class="nav-link" href="{{ route('popularcat.index') }}">
+    <a class="nav-link {{ setActive('popular*') }}" href="{{ route('popularcat.index') }}">
       <i class="fa fa-ad"> &nbsp; </i> Popular Categories
     </a>
   </li>

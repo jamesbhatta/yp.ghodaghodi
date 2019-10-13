@@ -57,12 +57,12 @@ class Business extends Model
 
     public function storeThumbnail($originalFile)
     {
-    	// $originalFile = $request->file('profile_pic');
-     $thumbnail = Image::make($originalFile)->resize(300, 200);
-     $path = public_path().'/uploads/thumbnail/';
-     File::isDirectory($path) or File::makeDirectory($path, 0777, true, true);
-     $thumbnailFilename = 'thumbnail/'.md5($originalFile . microtime()) . '.' . $originalFile->getClientOriginalExtension();
-     $thumbnail->save(public_path().'/uploads/'.$thumbnailFilename);
-     return $thumbnailFilename;
- }
+        // $originalFile = $request->file('profile_pic');
+        $thumbnail = Image::make($originalFile)->resize(300, 200);
+        $path = public_path().'/uploads/thumbnail/';
+        File::isDirectory($path) or File::makeDirectory($path, 0777, true, true);
+        $thumbnailFilename = 'thumbnail/'.md5($originalFile . microtime()) . '.' . $originalFile->getClientOriginalExtension();
+        $thumbnail->save(public_path().'/uploads/'.$thumbnailFilename);
+        return $thumbnailFilename;
+    }
 }

@@ -38,4 +38,20 @@ if (! function_exists('setActive')) {
 		return Request::routeIs($path) ? $active : '';
 	}
 }
+
+if (! function_exists('feedback')) {
+	/**
+	 * Check if the route is active or not
+	 *
+	 * @param  string  $key
+	 * @return string
+	 */
+	function feedback($key) {
+		$key = str_replace(['\'', '"'], '', $key);
+		$errors = session()->get('errors') ?: new \Illuminate\Support\ViewErrorBag;
+		if ($message = $errors->first($key)) {
+			return '<div class="invalid-feedback">'.$message.'</div>';
+		}
+	}
+}
 ?>

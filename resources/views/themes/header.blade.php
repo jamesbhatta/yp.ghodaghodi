@@ -19,6 +19,9 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link mdb-color-text" href="{{ route('event.list') }}">Events</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link mdb-color-text" href="{{ route('features') }}">Features</a>
     </li>
     <li class="nav-item">
