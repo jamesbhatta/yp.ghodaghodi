@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-    	// 
+    	//
     }
 
     /**
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
+
         Blade::directive('invalid', function($key) {
             $key = str_replace(['\'', '"'], '', $key);
             $errors = session()->get('errors') ?: new \Illuminate\Support\ViewErrorBag;
