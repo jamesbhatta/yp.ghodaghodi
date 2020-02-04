@@ -1,4 +1,4 @@
-<div class="card rounded-0 border-0 z-depth-1 wow">
+<div class="card rounded-0 border-0 z-depth-0">
 	<div class="card-header white mdb-color-text">
 		<h3 class="h3 d-inline text-uppercase">Opening Hours</h3>
 		<i class="far fa-clock float-right fa-2x"></i>
@@ -32,10 +32,10 @@
 					@endswitch
 					<td>
 						@if($business_hours->open_time)
-						{{ date('g:i A', strtotime($business_hours->open_time)) }} - 
+						{{ date('g:i A', strtotime($business_hours->open_time)) }} -
 						{{ date('g:i A', strtotime($business_hours->close_time)) }}
 						@else
-						Closed 
+						Closed
 						@endif
 					</td>
 				</tr>

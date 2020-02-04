@@ -161,7 +161,11 @@ class BusinessController extends Controller
      */
     public function edit(Business $business)
     {
-        //
+        $heading = 'Edit Business Details';
+        $zones  = Zone::orderBy('name')->get();
+        $cities  = City::orderBy('name')->get();
+        $categories = Category::select('id', 'name')->orderBy('name')->get();
+        return view('business.edit', compact('heading', 'business', 'categories', 'zones', 'cities'));
     }
 
     /**
@@ -173,7 +177,105 @@ class BusinessController extends Controller
      */
     public function update(Request $request, Business $business)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $business->name = $request->name;
+            $business->tagline = $request->tagline;
+            $business->business_type = $request->business_type;
+            $business->account_type = $request->account_type;
+            $business->category_id = $request->category_id;
+            $business->expires_at = $request->expires_at;
+            $business->city_id = $request->city_id;
+            $business->address = $request->address;
+            $business->contact_one = $request->contact_one;
+            $business->contact_two = $request->contact_two;
+            $business->email = $request->email;
+            $business->website = $request->website;
+            $business->map_id = $request->map_id;
+            $business->facebook_link = $request->facebook_link;
+            $business->twitter_link = $request->twitter_link;
+            $business->google_link = $request->google_link;
+            $business->description_title = $request->description_title;
+            $business->description = $request->description;
+            $business->services_title = $request->services_title;
+            $business->services = $request->services;
+            $business->keywords = $request->keywords;
+            if ($request->profile_pic) {
+                if ($business->profile_pic != 'no_image.jpg' ) {
+                    Storage::disk('public_uploads')->delete($business->profile_pic);
+                    Storage::disk('public_uploads')->delete($business->thumbnail);
+                }
+                $business->profile_pic = Storage::disk('public_uploads')->put('profile', $request->file('profile_pic'));
+                $business->thumbnail =  $business->storeThumbnail($request->file('profile_pic'));
+            }
+            if ($request->cover_pic) {
+                if ($business->cover_pic != 'no_image.jpg' ) {
+                    Storage::disk('public_uploads')->delete($business->cover_pic);
+                }
+                $business->cover_pic = Storage::disk('public_uploads')->put('cover', $request->file('cover_pic'));
+            }
+            $business->save();
+
+            BusinessHour::where('business_id', $business->id)->delete();
+
+            $businessHours = array(
+                array(
+                    'business_id' => $business->id,
+                    'day' => 1,
+                    'open_time' => $request->sun_open_time,
+                    'close_time' => $request->sun_close_time,
+                ),
+                array(
+                    'business_id' => $business->id,
+                    'day' => 2,
+                    'open_time' => $request->mon_open_time,
+                    'close_time' => $request->mon_close_time,
+                ),
+                array(
+                    'business_id' => $business->id,
+                    'day' => 3,
+                    'open_time' => $request->tues_open_time,
+                    'close_time' => $request->tues_close_time,
+                ),
+                array(
+                    'business_id' => $business->id,
+                    'day' => 4,
+                    'open_time' => $request->wednes_open_time,
+                    'close_time' => $request->wednes_close_time,
+                ),
+                array(
+                    'business_id' => $business->id,
+                    'day' => 5,
+                    'open_time' => $request->thurs_open_time,
+                    'close_time' => $request->thurs_close_time,
+                ),
+                array(
+                    'business_id' => $business->id,
+                    'day' => 6,
+                    'open_time' => $request->fri_open_time,
+                    'close_time' => $request->fri_close_time,
+                ),
+                array(
+                    'business_id' => $business->id,
+                    'day' => 7,
+                    'open_time' => $request->satur_open_time,
+                    'close_time' => $request->satur_close_time,
+                ),
+
+            );
+            BusinessHour::insert($businessHours);
+            DB::commit();
+            $request->session()->flash('success', 'Business Updated Successfully.');
+        } catch (Exception $e) {
+            // Storage::disk('public_uploads')->delete($business->profile_pic);
+            // Storage::disk('public_uploads')->delete($business->cover_pic);
+            // Storage::disk('public_uploads')->delete($business->thumbnail);
+            DB::rollback();
+            return $business->profile_pic;
+            $request->session()->flash('error', 'Something went wrong please check the form.');
+        }
+
+        return redirect()->route('business.index');
     }
 
     /**

@@ -1,19 +1,34 @@
-<div class="container-fluid p-0 white" style="font-weight: 300;">
+<style>
+	.profile-pic{
+		max-width: 300px;
+		z-index: 999;
+	}
+</style>
+<div class="container-fluid p-0 " style="font-weight: 300;">
+	@if($business->cover_pic != 'no_image.jpg')
 	<div class="view">
-		@if($business->cover_pic == 'no_image.jpg')
-		<img src="https://mdbootstrap.com/img/Photos/Others/images/60.jpg" class="img-fluid" alt="">
-		@else
-		<img src="{{ asset('uploads/'. $business->cover_pic) }}" class="img-fluid" alt="">
-		@endif
-		<div class="mask d-flex  align-items-end rgba-black-light">
-			<p class="white-text ">
-				<div class="flex-grow-1 text-center rgba-black-strong py-2 px-4">			
-					<h1 class="h1 font-weight-bolder white-text">{{ $business->name }}</h1>
-					<div class="white-text text-center"><big>{{ $business->tagline ?? $business->address }}</big></div>
+		<img class="img-fluid" src="{{ asset('uploads/'. $business->cover_pic) }}" alt="{{ $business->name }}" style="width:100%;">
+		<div class="mask d-flex align-items-end">
+			<p class="white-text">
+				<div class="m-2">
+					<div class="d-flex align-items-end">
+						@if ($business->prifile_pic != "no_image.jpg")
+						<div class="mr-2">
+							<img class="img-fluid img-thumbnail profile-pic" src="{{ asset('uploads/'. $business->profile_pic) }}" alt="{{ $business->name }}">
+						</div>
+						@endif
+						<div class="rgba-black-light p-4">
+							<h1 class="h1-responsive font-weight-bold white-text text-orange">{{ $business->name }}</h1>
+							<div class="white-text text-center font-weight-bolder text-monospace">{{ $business->tagline ?? $business->address }}</div>
+						</div>
+					</div>
 				</div>
 			</p>
 		</div>
 	</div>
+	@elseif( $business->profile_pic != "no_image.jpg" )
+	@else
+	@endif
 
 	<div class="unique-color-dark white-text">
 		<div class="d-flex flex-column flex-md-row p-4">
@@ -26,7 +41,7 @@
 			<div class="text-center flex-fill">
 				<div class="d-flex flex-row flex-md-column">
 					<div class="flex-fil"><i class="far fa-envelope fa-2x cyan-text mb-2"></i></div>
-					<div class="flex-fill">{{ $business->email }}</div>
+					<div class="flex-fill"><a class="text-white" href="mailto:{{ $business->email }}">{{ $business->email }}</a></div>
 				</div>
 			</div>
 			<div class="text-center flex-fill">
@@ -61,7 +76,7 @@
 						</div>
 						<div class="col-md-7">
 							{{-- Business Details Card --}}
-							<div class="card wow">
+							<div class="card z-depth-0">
 								<div class="card-header white mdb-color-text">
 									<h3 class="h3 d-inline text-uppercase">Details</h3>
 								</div>
@@ -69,12 +84,12 @@
 									<table class="table table-borderless">
 										<tbody>
 											<tr>
-												<th scope="row">Address : </th>
+												<th scope="row">Address</th>
 												<td>{{ $business->address }} , {{ $business->city->name }}</td>
 											</tr>
 
 											<tr>
-												<th scope="row">Phone : </th>
+												<th scope="row">Phone</th>
 												<td>{{ $business->contact_one ?? $business->contact_two }}</td>
 											</tr>
 											@if($business->contact_two)
@@ -84,13 +99,13 @@
 											</tr>
 											@endif
 											<tr>
-												<th scope="row">Email : </th>
-												<td>{{ $business->email }}</td>
+												<th scope="row">Email</th>
+												<td><a href="mailto:{{ $business->email }}">{{ $business->email }}</a></td>
 											</tr>
 											@if($business->website)
 											<tr>
-												<th scope="row">Website : </th>
-												<td><a href="{{ $business->website }}" class="text-info">{{ $business->website }}</a></td>
+												<th scope="row">Website</th>
+												<td><a class="text-info" href="{{ $business->website }}" target="_blank" data-toggle="tooltip" title="Open Link">{{ $business->website }}</a></td>
 											</tr>
 											@endif
 										</tbody>
@@ -114,29 +129,22 @@
 						</div>
 					</div>
 					{{-- End of row --}}
-					<div class="row mt-4">
-						<div class="col-md-6">
-							<div class="text-center mdb-color-text">
-								<h4 class="h4">{{ $business->description_title ?? 'Who We Are?' }}</h4>
-							</div>
-							<p>
-								{!! $business->description !!}
-							</p>
+
+					<div class="white my-4 p-4">
+						<div class="mdb-color-text">
+							<h4 class="h4 d-inline-block border-bottom border-warning">{{ $business->description_title ?? 'Who We Are?' }}</h4>
 						</div>
-						<div class="col-md-6">
-							<div class="text-center mdb-color-text">
-								<h4 class="h4">{{ $business->services_title ?? 'Our Services' }}</h4>
-							</div>
-							<p>
-								<ul class="list-group list-group-flush">
-									<li class="list-group-item">
-										{!! $business->services !!}
-									</li>
-								</ul>
-							</p>
+						<div class="">
+							{!! $business->description !!}
+						</div>
+						<div class="mdb-color-text">
+							<h4 class="h4 d-inline-block border-bottom border-warning">{{ $business->services_title ?? 'Our Services' }}</h4>
+						</div>
+						<div>
+							{!! $business->services !!}
 						</div>
 					</div>
-					
+
 					{{-- Google Map --}}
 					<div class="mt-2">
 						<h3 class="h3 text-center mdb-color-text">Find Us Here</h3>
@@ -239,32 +247,8 @@
 				</div>
 			</div>
 			{{-- Sidebar content --}}
-			<div class="col-md-4 border-left">
-				<div class="white p-2">
-					
-					<div class="my-4 text-center">
-						<img class="image-fluid" src="{{ asset('images/watch_netflix.jpg') }}" alt="">
-					</div>
-					<div class="my-4">
-						<div class="card border-0 mx-auto w-responsive">
-							<div class="card-body">
-								<h3>Other Categories</h3>
-								<ul class="list-group list-group-flush">
-									<li class="list-group-item border-0"><a href="">Automobile</a></li>
-									<li class="list-group-item border-0"><a href="">Bank & Finance</a></li>
-									<li class="list-group-item border-0"><a href="">Computer & Internet</a></li>
-									<li class="list-group-item border-0"><a href="">Construction</a></li>
-									<li class="list-group-item border-0"><a href="">Education</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="my-2 text-center">
-						<img class="image-fluid" src="{{ asset('images/netflix.jpg') }}" alt="" style="max-width: 300px;">
-					</div>
-
-
-				</div>
+			<div class="col-md-4">
+				@include('components.search-sidebar')
 			</div>
 			{{-- End of Sidebar --}}
 		</div>
@@ -277,7 +261,7 @@
 	$('.wow').addClass('animated custom-animation bounceInUp slow');
 </script>
 
-<script> 
+<script>
 	function sendEmail(){
 		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 		var name = $('#contactForm input[name="name"]').val();
@@ -301,7 +285,7 @@
 				$('#btnContactUs').hide();
 				$('#contactFormSuccess').show();
 			},
-			error: function(XMLHttpRequest, textStatus, errorThrown, request) { 
+			error: function(XMLHttpRequest, textStatus, errorThrown, request) {
 				console.log("Form Status: " + textStatus);
 				console.log("Form Error: " + errorThrown);
 				console.log(name, email, message);

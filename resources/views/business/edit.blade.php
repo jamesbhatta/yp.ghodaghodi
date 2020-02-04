@@ -12,8 +12,9 @@
 	@include('partials.success')
 	@include('partials.danger')
 
-	<form action="{{ route('business.store') }}" enctype="multipart/form-data" class="form mdb-color-text" method="POST">
+	<form action="{{ route('business.update', $business->id) }}" enctype="multipart/form-data" class="form mdb-color-text" method="POST">
 		@csrf
+		@method('put')
 		<div class="card border-0 mb-4">
 			<div class="card-body">
 				<h4 class="h4 d-inline mdb-color-text">Account Information</h4>
@@ -21,14 +22,14 @@
 					<div class="col-md-6">
 						<div class="md-form form-lg">
 							<label for="name">Name</label>
-							<input type="text" name="name" class="form-control form-control-lg {{ errorClass('name') }}" value="{{ old('name') }}">
+							<input type="text" name="name" class="form-control form-control-lg {{ errorClass('name') }}" value="{{ old('name', $business->name) }}">
 							@invalid('name')
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="md-form form-lg">
 							<label for="">Tagline</label>
-							<input type="text" name="tagline" class="form-control form-control-lg {{ errorClass('tagline') }}" value="{{ old('tagline') }}">
+							<input type="text" name="tagline" class="form-control form-control-lg {{ errorClass('tagline') }}" value="{{ old('tagline', $business->tagline ) }}">
 							@invalid('tagline')
 						</div>
 					</div>
@@ -36,8 +37,8 @@
 						<div class="form-group">
 							<label>Business Type</label>
 							<select name="business_type" class="form-control rounded-0 {{ errorClass('business_type') }}" id="businessType">
-								<option value="1" {{ old('business_type') == '1' ? 'selected' : '' }}>Business House</option>
-								<option value="2" {{ old('business_type') == '2' ? 'selected' : '' }}>Freelancer</option>
+								<option value="1" {{ old('business_type', $business->business_type ) == '1' ? 'selected' : '' }}>Business House</option>
+								<option value="2" {{ old('business_type', $business->business_type ) == '2' ? 'selected' : '' }}>Freelancer</option>
 							</select>
 						</div>
 					</div>
@@ -45,8 +46,8 @@
 						<div class="form-group">
 							<label>Account Type</label>
 							<select name="account_type" class="form-control rounded-0 {{ errorClass('account_type') }}" id="accountType">
-								<option value="1" {{ old('account_type') == '1' ? 'selected' : '' }}>Free</option>
-								<option value="2" {{ old('account_type') == '2' ? 'selected' : '' }}>Premium</option>
+								<option value="1" {{ old('account_type', $business->account_type) == '1' ? 'selected' : '' }}>Free</option>
+								<option value="2" {{ old('account_type', $business->account_type) == '2' ? 'selected' : '' }}>Premium</option>
 							</select>
 						</div>
 					</div>
@@ -55,7 +56,7 @@
 							<label for="">Category</label>
 							<select name="category_id" class="form-control rounded-0 selectpicker {{ errorClass('category_id') }}" id="categories">
 								@forelse($categories as $category)
-								<option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+								<option value="{{ $category->id }}" {{ old('category_id', $business->category_id) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
 								@empty
 								<option disabled selected>No Category</option>
 								@endforelse
@@ -66,7 +67,7 @@
 					<div class="col-md-3 premium-feature">
 						<div class="form-group">
 							<label>Licensed Until</label>
-							<input type="date" name="expires_at" class="form-control {{ errorClass('expires_at') }}" value="{{ old('expires_at') }}">
+							<input type="date" name="expires_at" class="form-control {{ errorClass('expires_at') }}" value="{{ old('expires_at',$business->expires_at ) }}">
 							@invalid('expires_at')
 						</div>
 					</div>
@@ -88,7 +89,7 @@
 							<select name="city_id" class="form-control rounded-0 {{ errorClass('city_id') }}" id="district">
 								<option></option>
 								@foreach($cities as $city)
-								<option value="{{ $city->id }}" {{ old('city_id') == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
+								<option value="{{ $city->id }}" {{ old('city_id', $business->city_id) == $city->id ? 'selected' : '' }}>{{ $city->name }}</option>
 								@endforeach
 							</select>
 							@invalid('city_id')
@@ -99,7 +100,7 @@
 						<div class="md-form">
 							<i class="fa fa-map-marker-alt prefix"></i>
 							<label>Address *</label>
-							<input type="text" name="address" class="form-control {{ errorClass('address') }}" value="{{ old('address') }}" placeholder="1234 Main St">
+							<input type="text" name="address" class="form-control {{ errorClass('address') }}" value="{{ old('address', $business->address ) }}" placeholder="1234 Main St">
 							@invalid('address')
 						</div>
 					</div>
@@ -108,7 +109,7 @@
 						<div class="md-form">
 							<i class="fa fa-phone prefix"></i>
 							<label for="">Landline</label>
-							<input type="text" name="contact_one" class="form-control {{ errorClass('contact_one') }}" value="{{ old('contact_one') }}" placeholder="+977-xxx-xxxxxx">
+							<input type="text" name="contact_one" class="form-control {{ errorClass('contact_one') }}" value="{{ old('contact_one', $business->contact_one) }}" placeholder="+977-xxx-xxxxxx">
 							<small class="form-text text-muted">Your business Landline number.</small>
 							@invalid('contact_one')
 						</div>
@@ -118,7 +119,7 @@
 						<div class="md-form">
 							<i class="fa fa-mobile-alt prefix"></i>
 							<label for="">Mobile</label>
-							<input type="text" name="contact_two" class="form-control {{ errorClass('contact_two') }}" value="{{ old('contact_two') }}" placeholder="+977 98xxxxxxxx">
+							<input type="text" name="contact_two" class="form-control {{ errorClass('contact_two') }}" value="{{ old('contact_two', $business->contact_two) }}" placeholder="+977 98xxxxxxxx">
 							<small class="form-text text-muted">Personal or business mobile number.</small>
 							@invalid('contact_two')
 						</div>
@@ -128,7 +129,7 @@
 						<div class="md-form">
 							<i class="far fa-envelope prefix"></i>
 							<label for="">Email *</label>
-							<input type="email" name="email" class="form-control {{ errorClass('email') }}" value="{{ old('email') }}" placeholder="mailto@email.com">
+							<input type="email" name="email" class="form-control {{ errorClass('email') }}" value="{{ old('email', $business->email) }}" placeholder="mailto@email.com">
 							<small class="form-text text-muted">Business E-mail.</small>
 							@invalid('email')
 						</div>
@@ -138,7 +139,7 @@
 						<div class="md-form">
 							<i class="fa fa-globe prefix"></i>
 							<label for="">Website</label>
-							<input type="text" name="website" class="form-control {{ errorClass('website') }}" value="{{ old('website') }}" placeholder="www.example.com">
+							<input type="text" name="website" class="form-control {{ errorClass('website') }}" value="{{ old('website', $business->website) }}" placeholder="www.example.com">
 							<small class="form-text text-muted">Website URL (if any).</small>
 							@invalid('website')
 						</div>
@@ -148,7 +149,7 @@
 						<div class="md-form">
 							<i class="far fa-map prefix"></i>
 							<label for="">Google Map Place ID</label>
-							<input type="text" name="map_id" class="form-control {{ errorClass('map_id') }}" value="{{ old('map_id') }}" placeholder=" ">
+							<input type="text" name="map_id" class="form-control {{ errorClass('map_id') }}" value="{{ old('map_id', $business->map_id) }}" placeholder=" ">
 							<small class="form-text text-muted">The Place ID from google map. (Premium) <a href="https://developers.google.com/places/place-id" target="_blank">Find Google ID</a></small>
 							@invalid('map_id')
 						</div>
@@ -171,57 +172,57 @@
 								<tr>
 									<th>Sunday</th>
 									<td class="">
-										<input type="time" name="sun_open_time" class="form-control form-control-sm" value="{{ old('sun_open_time') }}">
+										<input type="time" name="sun_open_time" class="form-control form-control-sm" value="{{ old('sun_open_time', $business->business_hours['0']->open_time ) }}">
 										<span class="mx-4">To</span>
-										<input type="time" name="sun_close_time" class="form-control form-control-sm" value="{{ old('sun_close_time') }}">
+										<input type="time" name="sun_close_time" class="form-control form-control-sm" value="{{ old('sun_close_time', $business->business_hours['0']->close_time ) }}">
 									</td>
 								</tr>
 								<tr>
 									<th>Monday</th>
 									<td>
-										<input type="time" name="mon_open_time" class="form-control form-control-sm" value="{{ old('mon_open_time') }}">
+										<input type="time" name="mon_open_time" class="form-control form-control-sm" value="{{ old('mon_open_time', $business->business_hours['1']->open_time ) }}">
 										<span class="mx-4">To</span>
-										<input type="time" name="mon_close_time" class="form-control form-control-sm" value="{{ old('mon_close_time') }}">
+										<input type="time" name="mon_close_time" class="form-control form-control-sm" value="{{ old('mon_close_time', $business->business_hours['1']->close_time ) }}">
 									</td>
 								</tr>
 								<tr>
 									<th>Tuesday</th>
 									<td>
-										<input type="time" name="tues_open_time" class="form-control form-control-sm" value="{{ old('tues_open_time') }}">
+										<input type="time" name="tues_open_time" class="form-control form-control-sm" value="{{ old('tues_open_time', $business->business_hours['2']->open_time ) }}">
 										<span class="mx-4">To</span>
-										<input type="time" name="tues_close_time" class="form-control form-control-sm" value="{{ old('tues_close_time') }}">
+										<input type="time" name="tues_close_time" class="form-control form-control-sm" value="{{ old('tues_close_time', $business->business_hours['2']->close_time ) }}">
 									</td>
 								</tr>
 								<tr>
 									<th>Wednesday</th>
 									<td>
-										<input type="time" name="wednes_open_time" class="form-control form-control-sm" value="{{ old('wednes_open_time') }}">
+										<input type="time" name="wednes_open_time" class="form-control form-control-sm" value="{{ old('wednes_open_time', $business->business_hours['3']->open_time ) }}">
 										<span class="mx-4">To</span>
-										<input type="time" name="wednes_close_time" class="form-control form-control-sm" value="{{ old('wednes_close_time') }}">
+										<input type="time" name="wednes_close_time" class="form-control form-control-sm" value="{{ old('wednes_close_time', $business->business_hours['3']->close_time) }}">
 									</td>
 								</tr>
 								<tr>
 									<th>Thursday</th>
 									<td>
-										<input type="time" name="thurs_open_time" class="form-control form-control-sm" value="{{ old('thurs_open_time') }}">
+										<input type="time" name="thurs_open_time" class="form-control form-control-sm" value="{{ old('thurs_open_time', $business->business_hours['4']->open_time ) }}">
 										<span class="mx-4">To</span>
-										<input type="time" name="thurs_close_time" class="form-control form-control-sm" value="{{ old('thurs_close_time') }}">
+										<input type="time" name="thurs_close_time" class="form-control form-control-sm" value="{{ old('thurs_close_time', $business->business_hours['4']->close_time) }}">
 									</td>
 								</tr>
 								<tr>
 									<th>Friday</th>
 									<td>
-										<input type="time" name="fri_open_time" class="form-control form-control-sm" value="{{ old('fri_open_time') }}">
+										<input type="time" name="fri_open_time" class="form-control form-control-sm" value="{{ old('fri_open_time', $business->business_hours['5']->open_time ) }}">
 										<span class="mx-4">To</span>
-										<input type="time" name="fri_close_time" class="form-control form-control-sm" value="{{ old('fri_close_time') }}">
+										<input type="time" name="fri_close_time" class="form-control form-control-sm" value="{{ old('fri_close_time', $business->business_hours['5']->close_time) }}">
 									</td>
 								</tr>
 								<tr>
 									<th>Saturday</th>
 									<td>
-										<input type="time" name="satur_open_time" class="form-control form-control-sm" value="{{ old('satur_open_time') }}">
+										<input type="time" name="satur_open_time" class="form-control form-control-sm" value="{{ old('satur_open_time', $business->business_hours['6']->open_time ) }}">
 										<span class="mx-4">To</span>
-										<input type="time" name="satur_close_time" class="form-control form-control-sm" value="{{ old('satur_close_time') }}">
+										<input type="time" name="satur_close_time" class="form-control form-control-sm" value="{{ old('satur_close_time', $business->business_hours['6']->close_time ) }}">
 									</td>
 								</tr>
 
@@ -240,21 +241,21 @@
 						<div class="md-form w-responsive">
 							<i class="fab fa-facebook-f prefix text-primary"></i>
 							<label>Facebook Link</label>
-							<input type="text" name="facebook_link" class="form-control" value="{{ old('facebook_link') }}" placeholder="https://www.facebook.com/[mypage]">
+							<input type="text" name="facebook_link" class="form-control" value="{{ old('facebook_link', $business->facebook_link) }}" placeholder="https://www.facebook.com/[mypage]">
 						</div>
 						<br>
 						{{-- Twitter --}}
 						<div class="md-form w-responsive">
 							<i class="fab fa-twitter prefix text-info"></i>
 							<label>Twitter Link</label>
-							<input type="text" name="twitter_link" class="form-control" value="{{ old('twitter_link') }}" placeholder="http://twitter.com/[username]">
+							<input type="text" name="twitter_link" class="form-control" value="{{ old('twitter_link', $business->twitter_link ) }}" placeholder="http://twitter.com/[username]">
 						</div>
 						<br>
 						{{-- Google Plus --}}
 						<div class="md-form w-responsive">
 							<i class="fab fa-google-plus-g prefix text-danger"></i>
 							<label>Google Plus Link</label>
-							<input type="text" name="google_link" class="form-control" value="{{ old('google_link') }}" placeholder="https://www.plus.google.com/[account_id]">
+							<input type="text" name="google_link" class="form-control" value="{{ old('google_link', $business->google_link ) }}" placeholder="https://www.plus.google.com/[account_id]">
 						</div>
 					</div>
 				</div>
@@ -262,20 +263,17 @@
 			</div>
 		</div>
 
-
-
-
 		{{-- Who-we-are Card --}}
 		<div class="card border-0 mb-4 premium-feature">
 			<div class="card-body">
 				<h4 class="h4 d-inline mdb-color-text">Description ( Who We Are? )</h4>
 				<div class="md-form">
 					<label>Title</label>
-					<input type="text" name="description_title" class="form-control w-50" value="{{ old('description_title') }}" placeholder="Default: Who We Are?">
+					<input type="text" name="description_title" class="form-control w-50" value="{{ old('description_title', $business->description_title ) }}" placeholder="Default: Who We Are?">
 				</div>
 				<div class="form-group">
 					<label>Description</label>
-					<textarea name="description" id="description" class="form-control" cols="30" rows="10">{{ old('description') }}</textarea>
+					<textarea name="description" id="description" class="form-control" cols="30" rows="10">{{ old('description', $business->description) }}</textarea>
 				</div>
 			</div>
 		</div>
@@ -287,11 +285,11 @@
 				<h4 class="h4 mdb-color-text">Our Services</h4>
 				<div class="md-form">
 					<label>Title</label>
-					<input type="text" name="services_title" class="form-control w-50" value="{{ old('services_title') }}" placeholder="Default: Our Services">
+					<input type="text" name="services_title" class="form-control w-50" value="{{ old('services_title', $business->services_title) }}" placeholder="Default: Our Services">
 				</div>
 				<div class="form-group">
 					<label>Services Description</label>
-					<textarea name="services" id="services" class="form-control" cols="30" rows="10">{{ old('services') }}</textarea>
+					<textarea name="services" id="services" class="form-control" cols="30" rows="10">{{ old('services', $business->services) }}</textarea>
 				</div>
 			</div>
 		</div>
@@ -303,7 +301,7 @@
 				<h4 class="h4 mdb-color-text">Keywords</h4>
 				<div class="form-group">
 					<label class="small form-text text-muted">Keywords will be used while searching for businesses.</label>
-					<textarea name="keywords" class="form-control" cols="30" rows="10" placeholder="Keywords should contain descriptive test such as Restaurant, Coffee House, Computer Store, etc.">{{ old('keywords') }}</textarea>
+					<textarea name="keywords" class="form-control" cols="30" rows="10" placeholder="Keywords should contain descriptive test such as Restaurant, Coffee House, Computer Store, etc.">{{ old('keywords', $business->keywords ) }}</textarea>
 				</div>
 			</div>
 		</div>
@@ -314,7 +312,7 @@
 			<div class="col-md-6">
 				<div class="card mx-auto" style="max-width: 300px;">
 					<div class="view overlay">
-						<img class="card-img-top" id="profile_pic_preview" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap">
+						<img class="card-img-top" id="profile_pic_preview" src="{{ asset('uploads/'. $business->profile_pic) }}" alt="{{ $business->name }}">
 						<a href="#!">
 							<div class="mask rgba-white-slight"></div>
 							<input type="file" name="profile_pic" id="profile_pic" hidden>
@@ -331,7 +329,7 @@
 			<div class="col-md-6 premium-feature">
 				<div class="card mx-auto" style="max-width: 300px;">
 					<div class="view overlay">
-						<img class="card-img-top" id="cover_pic_preview" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap">
+						<img class="card-img-top" id="cover_pic_preview" src="{{ asset('uploads/'. $business->cover_pic) }}" alt="{{ $business->name }}">
 						<a href="#!">
 							<div class="mask rgba-white-slight"></div>
 							<input type="file" name="cover_pic" id="cover_pic" hidden>
@@ -352,7 +350,7 @@
 			<div class="card card-body">
 				<div class="row">
 					<div class="col-md-6">
-						<button class="btn btn-success btn-block">Register</button>
+						<button class="btn btn-success btn-block">Update</button>
 					</div>
 				</div>
 			</div>

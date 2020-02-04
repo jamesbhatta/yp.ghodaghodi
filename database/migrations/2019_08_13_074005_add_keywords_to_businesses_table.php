@@ -14,7 +14,7 @@ class AddKeywordsToBusinessesTable extends Migration
     public function up()
     {
         Schema::table('businesses', function (Blueprint $table) {
-            $table->mediumText('keywords');
+            $table->mediumText('keywords')->nullable();
         });
     }
 

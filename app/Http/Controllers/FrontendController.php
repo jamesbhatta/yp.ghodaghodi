@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\Category;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -21,7 +22,7 @@ class FrontendController extends Controller
 
 		/*if ($city_id && $category_id && $keyword) {
 			$businesses = Business::where('name', 'like', '%'.$keyword.'%')
-			
+
 			->where('city_id', $city_id)
 			->where('category_id', $category_id)
 			->with(['category', 'city', 'business_hours'])
@@ -113,17 +114,19 @@ class FrontendController extends Controller
 			}
 		}
 
-
 		$businesses = $businesses->orderBy('account_type', 'desc')
 		->with(['category', 'city', 'business_hours'])->paginate(15);
 
+		$categories = Category::orderBy('name', 'asc')->get();
 
-		return view('frontend.search', compact(['businesses', 'keyword', 'city', 'city_id', 'category', 'category_id']));
+		return view('frontend.search', compact(['businesses', 'keyword', 'city', 'city_id', 'category', 'category_id', 'categories']));
 	}
 
 	public function viewBusiness($slug)
 	{
 		$business = Business::where('slug', $slug)->with(['city', 'business_hours'])->first();
-		return view('frontend.show', compact('business'));
+		$categories = Category::orderBy('name', 'asc')->get();
+		$similarBusinesses = Business::orderBy('account_type', 'desc')->where('category_id', $business->category_id)->where('city_id', $business->city_id)->where('id', '!=', $business->id)->with('city')->take(15)->get();
+		return view('frontend.show', compact(['business', 'categories', 'similarBusinesses']));
 	}
 }

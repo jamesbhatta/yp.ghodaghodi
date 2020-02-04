@@ -11,7 +11,7 @@
 			<div class="card">
 				<div class="card-header secondary-color text-white">Add New</div>
 				<div class="card-body">
-					
+
 					<form action="{{ route('category.store') }}" class="form" method="POST">
 						@csrf
 						<div class="form-group">
@@ -51,14 +51,14 @@
 									{{ $category->name }}
 								</td>
 								<td>
-									<a href="{{ Route('category.edit', $category->id) }}" class="btn btn-link py-0 my-0">
+									<a href="{{ Route('category.edit', $category->id) }}" class="btn btn-link py-0 my-0" data-toggle="tooltip" title="Edit">
 										<i class="fa fa-edit text-secondary"></i>
 									</a>
-									
-									<form class="form-inline d-inline" action="{{ Route('category.destroy', $category->id) }}" method="POST">
+
+									<form class="form-inline d-inline" onsubmit="return confirm('Sure to Delete?');" action="{{ Route('category.destroy', $category->id) }}" method="POST">
 										@csrf
 										@method('delete')
-										<button type="submit" class="btn btn-link py-0 my-0">
+										<button type="submit" class="btn btn-link py-0 my-0" data-toggle="tooltip" title="Delete">
 											<i class="fa fa-trash-alt text-danger"></i>
 										</button>
 									</form>

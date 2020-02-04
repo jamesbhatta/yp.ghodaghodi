@@ -13,12 +13,10 @@
 		border-bottom-left-radius: 30px;
 	}
 	.event-card .card-footer{
-		/*border-radius: 35px;*/
 		border-bottom-right-radius: 15px;
 		border-bottom-left-radius: 15px;
 	}
 	.event-card .event-btn{
-		/*border-radius: 20px;*/
 		border-bottom-right-radius: 15px;
 		border-bottom-left-radius: 15px;
 	}

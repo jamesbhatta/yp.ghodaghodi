@@ -26,17 +26,30 @@
 					{{ $item->name }}
 				</td>
 				<td>{{ $item->account_type == 2 ? 'Premium' : 'Free' }}</td>
-				<td>{{ $item->expires_at }}</td>
+				@if ($item->expires_at)
+				<td data-toggle="tooltip" title="{{ Carbon\Carbon::parse($item->expires_at)->diffForHumans() }}">
+					{{ Carbon\Carbon::parse($item->expires_at)->format('d M Y') }}
+				</td>
+				@else
+				<td></td>
+				@endif
 				<td>
-					<a href="{{ Route('business.edit', $item->id) }}" class="btn btn-link py-0 my-0">
-						<i class="fa fa-edit text-secondary"></i>
-					</a>
-					<a href="{{ route('restore', $item->id) }}"><i class="fa fa-trash-restore-alt text-success"></i></a>
-					<form action="{{ route('business.harddelete', $item->id) }}" class="form-inline d-inline" method="POST">
-						@csrf
-						@method('DELETE')
-						<button type="submit" class="btn btn-link"><i class="fa fa-minus text-danger"></i></button>
-					</form>
+					<div class="d-flex justify-content-between">
+						<div class="align-self-center">
+							<a href="{{ route('restore', $item->id) }}" data-toggle="tooltip" title="Restore">
+								<i class="fa fa-trash-restore-alt text-success"></i>
+							</a>
+						</div>
+						<div class="align-self-center">
+							<form action="{{ route('business.harddelete', $item->id) }}" class="form-inine d-nline p-0 m-0" method="POST">
+								@csrf
+								@method('DELETE')
+								<button type="submit" class="btn btn-link my-0 p-0" data-toggle="tooltip" title="Delete Permanently">
+									<i class="fa fa-minus text-danger"></i>
+								</button>
+							</form>
+						</div>
+					</div>
 				</td>
 			</tr>
 			@empty

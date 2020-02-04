@@ -56,9 +56,12 @@
   <script type="text/javascript" src="{{ asset('backend/js/addons/datatables.min.js') }}"></script>
 
   <script type="text/javascript">
-    // Animations initialization
-    new WOW().init();
+    $(document).ready(function() {
+      // Animations initialization
+      new WOW().init();
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   </script>
-  
+
 </body>
 </html>

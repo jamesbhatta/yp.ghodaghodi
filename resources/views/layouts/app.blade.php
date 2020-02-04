@@ -18,14 +18,19 @@
   <link href="{{ asset('backend/css/addons/datatables.min.css') }}" rel="stylesheet">
   <!-- JQuery -->
   <script type="text/javascript" src="{{ asset('backend/js/jquery-3.4.1.min.js') }}"></script>
-  
+
   {{-- Select2 --}}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 
   @stack('styles')
+  <style>
+    .text-orange{
+      color: #f77426;
+    }
+  </style>
 </head>
-<body class="grey lighten-5">
+<body style="background-color: #F3F4F8; color: #222;">
   @include('themes.header')
   @yield('content')
   @include('layouts.footer')
@@ -40,6 +45,10 @@
   <script type="text/javascript" src="{{ asset('backend/js/mdb.min.js') }}"></script>
   <!-- MDBootstrap Datatables  -->
   <script type="text/javascript" src="{{ asset('backend/js/addons/datatables.min.js') }}"></script>
-  
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
 </body>
 </html>

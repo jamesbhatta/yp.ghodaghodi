@@ -1,4 +1,4 @@
-<div class="white border m-2 p-2">
+<div class="white my-3 p-2">
 	<div class="pl-2 pb-2">
 		<h1 class="h1-responsive">Popular Searches</h1>
 	</div>

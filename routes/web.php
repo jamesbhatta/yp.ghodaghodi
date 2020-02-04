@@ -57,8 +57,6 @@ Route::get('/business/{slug}', 'FrontendController@viewBusiness')->name('busines
 Route::get('events', 'Frontend\EventController@index')->name('event.list');
 Route::get('events/{slug}', 'Frontend\EventController@show')->name('event.view');
 
-
-
 Route::get('/pricing', function() {
 	return view('extra.pricing');
 })->name('pricing');
