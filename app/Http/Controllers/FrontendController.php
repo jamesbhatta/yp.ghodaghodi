@@ -17,7 +17,9 @@ class FrontendController extends Controller
 	public function search()
 	{
 		$keyword = request('keyword', null);
+		$city = "";
 		$city_id = request('city', null);
+		$category = "";
 		$category_id = request('category', null);
 
 		/*if ($city_id && $category_id && $keyword) {
