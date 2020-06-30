@@ -44,4 +44,9 @@
       <i class="far fa-trash-alt"> &nbsp; </i> Trash
     </a>
   </li>
+  <li class="nav-item waves-effect">
+    <a class="nav-link {{ setActive('logs*') }}" href="{{ route('logs') }}" target="_blank">
+      <i class="fas fa-exclamation-triangle"> &nbsp; </i> System Logs
+    </a>
+  </li>
 </ul>

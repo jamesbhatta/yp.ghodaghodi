@@ -36,6 +36,9 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'verified']], func
 	Route::get('events/{event}/edit', 'EventController@edit')->name('event.edit');
 	Route::put('events/{event}', 'EventController@update')->name('event.update');
 	Route::delete('events/{event}', 'EventController@destroy')->name('event.destroy');
+
+	// Logs
+	Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs');
 });
 
 // Themes route
